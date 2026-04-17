@@ -39,17 +39,6 @@ To understand and implement real-world and interactive data visualization techni
 - Python 3.x installed
 - Required libraries:
 
-```python
-import plotly.express as px
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
-import matplotlib.pyplot as plt
-from matplotlib_venn import venn2
-from scipy.cluster.hierarchy import dendrogram, linkage
-import networkx as nx
-import pandas as pd
-import numpy as np
-```
 
 | Library | Install Command |
 |---|---|
@@ -81,19 +70,7 @@ import numpy as np
 
 ### 4.1 Treemap — Company Budget Distribution
 
-```python
-import pandas as pd
-import plotly.express as px
 
-df = pd.DataFrame({
-    'Department': ['HR', 'IT', 'Sales', 'Marketing'],
-    'Budget': [20000, 50000, 40000, 30000]
-})
-
-fig = px.treemap(df, path=['Department'], values='Budget',
-                 title="Company Budget Distribution")
-fig.show()
-```
 
 **Observation:** A treemap represents hierarchical data as nested rectangles. The area of each rectangle is proportional to its value. IT has the largest budget (50,000) and HR the smallest (20,000). The `path` parameter defines hierarchy levels.
 
@@ -101,22 +78,7 @@ fig.show()
 
 ### 4.2 Dendrogram — Hierarchical Clustering
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.cluster.hierarchy import dendrogram, linkage
 
-data = np.array([[5,3], [10,15], [15,12], [24,10], [30,30]])
-
-linked = linkage(data, method='ward')
-
-plt.figure(figsize=(6, 4))
-dendrogram(linked)
-plt.title("Dendrogram Example")
-plt.xlabel("Data Points")
-plt.ylabel("Distance")
-plt.show()
-```
 
 **Observation:** Ward's linkage minimises the total within-cluster variance at each merge step. The y-axis distance shows how dissimilar two clusters are at the point of merging — taller branches indicate more dissimilar clusters.
 
@@ -124,17 +86,6 @@ plt.show()
 
 ### 4.3 Venn Diagram — Set Relationships
 
-```python
-from matplotlib_venn import venn2
-import matplotlib.pyplot as plt
-
-A = {1, 2, 3, 4}
-B = {3, 4, 5, 6}
-
-venn2([A, B], set_labels=('Set A', 'Set B'))
-plt.title("Venn Diagram Example")
-plt.show()
-```
 
 **Set Breakdown:**
 
@@ -150,18 +101,7 @@ plt.show()
 
 ### 4.4 Sankey Diagram — Student Flow
 
-```python
-import plotly.graph_objects as go
 
-fig = go.Figure(data=[go.Sankey(
-    node=dict(label=["Admission", "First Year", "Second Year", "Placed"]),
-    link=dict(
-        source=[0, 1, 2],
-        target=[1, 2, 3],
-        value=[100, 80, 60])
-)])
-fig.show()
-```
 
 **Flow Summary:**
 
@@ -177,22 +117,7 @@ fig.show()
 
 ### 4.5 3D Scatter Plot — Student Performance
 
-```python
-import plotly.express as px
 
-df = pd.DataFrame({
-    'Study_Hours': [2, 4, 6, 8, 5],
-    'Marks':       [50, 65, 75, 90, 70],
-    'Attendance':  [60, 75, 80, 90, 70]
-})
-
-fig = px.scatter_3d(df,
-                    x='Study_Hours',
-                    y='Marks',
-                    z='Attendance',
-                    title="Student Performance Analysis")
-fig.show()
-```
 
 **Observation:** 3D scatter plots reveal relationships across three numeric variables simultaneously. Higher study hours correlate with higher marks and attendance. Plotly's interactive rotation allows exploring the cloud from any angle.
 
@@ -200,21 +125,7 @@ fig.show()
 
 ### 4.6 Radar Chart — Skill Assessment
 
-```python
-import plotly.graph_objects as go
 
-skills = ['Python', 'ML', 'DBMS', 'DSA', 'Communication']
-values = [4, 3, 5, 4, 3]
-
-fig = go.Figure()
-fig.add_trace(go.Scatterpolar(
-    r=values,
-    theta=skills,
-    fill='toself',
-    name='Student Skills'
-))
-fig.show()
-```
 
 **Skill Scores:**
 
@@ -234,18 +145,6 @@ fig.show()
 
 ### 1. Sunburst Chart — Hierarchical Organization
 
-```python
-fig = px.sunburst(
-    df_sunburst,
-    names='Entity',
-    parents='Parent',
-    values='Value',
-    title='Company Organization Structure - Sunburst Chart',
-    color='Type',
-    color_discrete_sequence=px.colors.qualitative.Set2
-)
-fig.show()
-```
 
 **Hierarchy:** Company → Department (Engineering, Marketing, Sales, HR) → Team (Frontend, Backend, Digital, Content, North, South, Recruiting, Training)
 
@@ -255,18 +154,6 @@ fig.show()
 
 ### 2. Parallel Coordinates Plot — Multivariate Student Analysis
 
-```python
-fig = px.parallel_coordinates(
-    df_parallel,
-    dimensions=['Math_Score', 'Physics_Score', 'Chemistry_Score',
-                'English_Score', 'Attendance_Rate'],
-    color='Average',
-    color_continuous_scale=px.colors.sequential.Viridis,
-    title='Student Performance - Parallel Coordinates Plot'
-)
-fig.show()
-```
-
 **Dataset:** 50 students with Math, Physics, Chemistry, English scores and Attendance Rate.
 
 **Observation:** Each vertical axis represents a variable; each line is one student. Lines that follow similar paths across all axes indicate similar students. High-average students (yellow) tend to score consistently across all subjects. Axes can be dragged interactively to reorder and filter.
@@ -275,21 +162,7 @@ fig.show()
 
 ### 3. Animated Scatter Plot — GDP vs Life Expectancy (2010–2023)
 
-```python
-fig = px.scatter(
-    df_animated,
-    x='GDP_per_Capita',
-    y='Life_Expectancy',
-    animation_frame='Year',
-    animation_group='Country',
-    size='Population',
-    color='Country',
-    log_x=True,
-    size_max=60,
-    title='GDP vs Life Expectancy (2010-2023)'
-)
-fig.show()
-```
+
 
 **Dataset:** 8 countries × 14 years (2010–2023); GDP, Life Expectancy, and Population modelled with upward trends.
 
@@ -308,17 +181,6 @@ fig.show()
 
 ### 4. Gauge Chart — System Performance Dashboard
 
-```python
-from plotly.subplots import make_subplots
-
-fig = make_subplots(
-    rows=2, cols=2,
-    specs=[[{'type': 'indicator'}, {'type': 'indicator'}],
-           [{'type': 'indicator'}, {'type': 'indicator'}]]
-)
-# Server Uptime: 98.5%, CPU: 65%, Memory: 78%, Network: 125 Mbps
-fig.add_trace(go.Indicator(mode="gauge+number", value=98.5, ...), row=1, col=1)
-```
 
 **Dashboard Summary:**
 
@@ -335,17 +197,7 @@ fig.add_trace(go.Indicator(mode="gauge+number", value=98.5, ...), row=1, col=1)
 
 ### 5. Funnel Chart — Sales Pipeline
 
-```python
-stages = ['Website Visits', 'Sign Ups', 'Product Views',
-          'Add to Cart', 'Checkout', 'Purchase']
-values = [10000, 6000, 4500, 2500, 1500, 800]
 
-fig = go.Figure(go.Funnel(
-    y=stages, x=values,
-    textinfo='value+percent initial'
-))
-fig.show()
-```
 
 **Conversion Rates:**
 
@@ -363,17 +215,7 @@ fig.show()
 
 ### 6. Waterfall Chart — Monthly Budget Analysis
 
-```python
-fig = go.Figure(go.Waterfall(
-    measure=['absolute', 'relative', 'relative', 'relative', 'relative', 'absolute'],
-    x=['Starting Balance', 'Income', 'Marketing', 'Operations', 'R&D', 'Ending Balance'],
-    y=[50000, 30000, -8000, -12000, -15000, 45000],
-    increasing={'marker': {'color': 'green'}},
-    decreasing={'marker': {'color': 'red'}},
-    totals={'marker': {'color': 'blue'}}
-))
-fig.show()
-```
+
 
 **Budget Summary:**
 
@@ -392,19 +234,7 @@ fig.show()
 
 ### 7. Network Graph — Social Network Analysis
 
-```python
-import networkx as nx
 
-G = nx.Graph()
-people = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Henry']
-G.add_nodes_from(people)
-G.add_edges_from([('Alice','Bob'), ('Alice','Charlie'), ...])
-
-pos = nx.spring_layout(G, k=1.5, iterations=50)
-# Render edges as go.Scatter lines, nodes as go.Scatter markers
-# Node size = G.degree(node) * 5 + 10
-fig.show()
-```
 
 **Network Stats:**
 
@@ -422,19 +252,6 @@ fig.show()
 
 ### 8. Choropleth Map — World Population
 
-```python
-fig = px.choropleth(
-    df_map,
-    locations='Country',
-    locationmode='country names',
-    color='Population_Millions',
-    hover_data=['GDP_Trillions'],
-    color_continuous_scale=px.colors.sequential.Plasma,
-    projection='natural earth',
-    title='World Population by Country (Millions)'
-)
-fig.show()
-```
 
 **Sample Data:**
 
@@ -451,21 +268,7 @@ fig.show()
 
 ### 9. Density Contour Plot — Height vs Weight Distribution
 
-```python
-fig = px.density_contour(
-    df_density,
-    x='Height_cm',
-    y='Weight_kg',
-    color='Body_Type',
-    marginal_x='histogram',
-    marginal_y='histogram',
-    title='Height vs Weight Density Distribution'
-)
-fig.update_traces(selector=dict(type='contour'),
-                  contours_coloring='fill',
-                  contours_showlabels=True)
-fig.show()
-```
+
 
 **Clusters generated (n=500):**
 
@@ -481,21 +284,7 @@ fig.show()
 
 ### 10. Polar Scatter Plot — Wind Speed and Direction
 
-```python
-fig = go.Figure()
-fig.add_trace(go.Scatterpolar(
-    r=speeds,       # Wind speed (radius)
-    theta=angles,   # Wind direction (angle)
-    mode='markers',
-    marker=dict(color=speeds, colorscale='Viridis', showscale=True)
-))
-fig.add_trace(go.Scatterpolar(
-    r=[25, 25], theta=[0, 360],
-    mode='lines', line=dict(color='red', dash='dash'),
-    name='Warning Level'
-))
-fig.show()
-```
+
 
 **Observation:** The radial axis encodes wind speed; the angular axis encodes compass direction. The dashed red circle at r=25 marks a warning threshold. `direction='clockwise'` matches compass convention (North at top, East at right).
 
@@ -503,18 +292,6 @@ fig.show()
 
 ### 11. Gantt Chart — Project Timeline
 
-```python
-fig = px.bar(
-    df_gantt,
-    x='Start',
-    y='Task',
-    color='Resource',
-    orientation='h',
-    hover_data=['Finish'],
-    title='Project Timeline - Gantt Chart'
-)
-fig.show()
-```
 
 **Project Schedule:**
 
@@ -534,20 +311,6 @@ fig.show()
 
 ### 12. 3D Surface Plot — Mathematical Function
 
-```python
-x = np.linspace(-5, 5, 50)
-y = np.linspace(-5, 5, 50)
-X, Y = np.meshgrid(x, y)
-Z = np.sin(np.sqrt(X**2 + Y**2))
-
-fig = go.Figure(data=[go.Surface(
-    z=Z, x=X, y=Y,
-    colorscale='Viridis',
-    contours=dict(z=dict(show=True, usecolormap=True, project=dict(z=True)))
-)])
-fig.show()
-```
-
 **Function:** z = sin(√(x² + y²)) — a ripple/wave pattern radiating from the origin.
 
 **Observation:** `np.meshgrid()` creates a 2D coordinate grid from 1D arrays. `contours=dict(z=dict(project=dict(z=True)))` projects contour lines onto the base plane, creating a shadow-like topographic map below the surface.
@@ -556,21 +319,7 @@ fig.show()
 
 ### 13. Multiple Radar Charts — Employee Skills Comparison
 
-```python
-employees = {
-    'Employee A': [4.5, 4.0, 3.5, 3.0, 4.5, 4.0],
-    'Employee B': [3.5, 4.5, 4.5, 4.0, 3.5, 4.5],
-    'Employee C': [5.0, 3.5, 3.0, 4.5, 4.0, 3.5]
-}
-skills = ['Python', 'SQL', 'Communication', 'Leadership', 'Problem Solving', 'Teamwork']
 
-for name, scores in employees.items():
-    fig.add_trace(go.Scatterpolar(
-        r=scores + [scores[0]],      # Close the polygon
-        theta=skills + [skills[0]],  # Close the polygon
-        fill='toself', opacity=0.6
-    ))
-```
 
 **Average Scores:**
 
@@ -586,13 +335,6 @@ for name, scores in employees.items():
 
 ### 14. Bullet Chart — KPI Performance vs Target
 
-```python
-fig = make_subplots(rows=4, cols=1,
-                    subplot_titles=['Revenue', 'Customer Satisfaction',
-                                    'New Users', 'Task Completion'])
-# For each KPI: background range bar + actual bar + target marker
-fig.show()
-```
 
 **KPI Results:**
 
